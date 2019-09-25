@@ -17,6 +17,12 @@
 		CF700833233A592400A37040 /* getNews.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF700832233A592400A37040 /* getNews.swift */; };
 		CF700835233A5CEF00A37040 /* NewsTabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF700834233A5CEF00A37040 /* NewsTabelCell.swift */; };
 		CF70083B233B738C00A37040 /* Fetching.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF70083A233B738C00A37040 /* Fetching.swift */; };
+		CFA154E3233B853D003C588A /* UtilsDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA154E2233B853D003C588A /* UtilsDate.swift */; };
+		CFA154E6233BA216003C588A /* NewsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA154E5233BA216003C588A /* NewsController.swift */; };
+		CFA154E9233BB07A003C588A /* Coordinator+Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA154E8233BB07A003C588A /* Coordinator+Model.swift */; };
+		CFA154EB233BB44A003C588A /* DecoderModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA154EA233BB44A003C588A /* DecoderModels.swift */; };
+		CFA154ED233BBDEC003C588A /* UtilsString.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA154EC233BBDEC003C588A /* UtilsString.swift */; };
+		CFA154F2233BCD4C003C588A /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA154F1233BCD4C003C588A /* NewsModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +38,12 @@
 		CF700832233A592400A37040 /* getNews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getNews.swift; sourceTree = "<group>"; };
 		CF700834233A5CEF00A37040 /* NewsTabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTabelCell.swift; sourceTree = "<group>"; };
 		CF70083A233B738C00A37040 /* Fetching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fetching.swift; sourceTree = "<group>"; };
+		CFA154E2233B853D003C588A /* UtilsDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsDate.swift; sourceTree = "<group>"; };
+		CFA154E5233BA216003C588A /* NewsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsController.swift; sourceTree = "<group>"; };
+		CFA154E8233BB07A003C588A /* Coordinator+Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Coordinator+Model.swift"; sourceTree = "<group>"; };
+		CFA154EA233BB44A003C588A /* DecoderModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoderModels.swift; sourceTree = "<group>"; };
+		CFA154EC233BBDEC003C588A /* UtilsString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsString.swift; sourceTree = "<group>"; };
+		CFA154F1233BCD4C003C588A /* NewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,15 +76,17 @@
 		CF700816233A4B7300A37040 /* Tinkoff */ = {
 			isa = PBXGroup;
 			children = (
-				CF700839233B736400A37040 /* New Group */,
+				CFA154F0233BC016003C588A /* App */,
+				CFA154EF233BC001003C588A /* CoreLayer */,
+				CFA154EE233BBFC4003C588A /* Models */,
+				CFA154E7233BA9AA003C588A /* Coordinator */,
+				CF70083C233B84F300A37040 /* Utils */,
+				CF700839233B736400A37040 /* Requests */,
 				CF700836233ABAFA00A37040 /* Controllers */,
-				CF700817233A4B7300A37040 /* AppDelegate.swift */,
 				CF700821233A4B7500A37040 /* Assets.xcassets */,
 				CF700823233A4B7500A37040 /* LaunchScreen.storyboard */,
 				CF700826233A4B7500A37040 /* Info.plist */,
 				CF70081E233A4B7300A37040 /* Tinkoff.xcdatamodeld */,
-				CF70082C233A585E00A37040 /* Coordinator+Main.swift */,
-				CF70082E233A588600A37040 /* Coordinator+First.swift */,
 				CF700832233A592400A37040 /* getNews.swift */,
 			);
 			path = Tinkoff;
@@ -81,6 +95,7 @@
 		CF700836233ABAFA00A37040 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				CFA154E4233BA1B6003C588A /* controllerNews+ */,
 				CF700837233ABB1100A37040 /* NewsList+Controller */,
 			);
 			path = Controllers;
@@ -103,12 +118,63 @@
 			path = "NewsList+Cell";
 			sourceTree = "<group>";
 		};
-		CF700839233B736400A37040 /* New Group */ = {
+		CF700839233B736400A37040 /* Requests */ = {
 			isa = PBXGroup;
 			children = (
 				CF70083A233B738C00A37040 /* Fetching.swift */,
+				CFA154EA233BB44A003C588A /* DecoderModels.swift */,
 			);
-			path = "New Group";
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		CF70083C233B84F300A37040 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				CFA154E2233B853D003C588A /* UtilsDate.swift */,
+				CFA154EC233BBDEC003C588A /* UtilsString.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		CFA154E4233BA1B6003C588A /* controllerNews+ */ = {
+			isa = PBXGroup;
+			children = (
+				CFA154E5233BA216003C588A /* NewsController.swift */,
+			);
+			path = "controllerNews+";
+			sourceTree = "<group>";
+		};
+		CFA154E7233BA9AA003C588A /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				CF70082C233A585E00A37040 /* Coordinator+Main.swift */,
+				CF70082E233A588600A37040 /* Coordinator+First.swift */,
+				CFA154E8233BB07A003C588A /* Coordinator+Model.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		CFA154EE233BBFC4003C588A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CFA154F1233BCD4C003C588A /* NewsModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CFA154EF233BC001003C588A /* CoreLayer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CoreLayer;
+			sourceTree = "<group>";
+		};
+		CFA154F0233BC016003C588A /* App */ = {
+			isa = PBXGroup;
+			children = (
+				CF700817233A4B7300A37040 /* AppDelegate.swift */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,13 +247,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFA154F2233BCD4C003C588A /* NewsModel.swift in Sources */,
+				CFA154E3233B853D003C588A /* UtilsDate.swift in Sources */,
 				CF700820233A4B7300A37040 /* Tinkoff.xcdatamodeld in Sources */,
 				CF70083B233B738C00A37040 /* Fetching.swift in Sources */,
 				CF700833233A592400A37040 /* getNews.swift in Sources */,
 				CF70082F233A588600A37040 /* Coordinator+First.swift in Sources */,
 				CF700818233A4B7300A37040 /* AppDelegate.swift in Sources */,
 				CF700835233A5CEF00A37040 /* NewsTabelCell.swift in Sources */,
+				CFA154ED233BBDEC003C588A /* UtilsString.swift in Sources */,
+				CFA154E9233BB07A003C588A /* Coordinator+Model.swift in Sources */,
+				CFA154EB233BB44A003C588A /* DecoderModels.swift in Sources */,
 				CF700831233A58C100A37040 /* NewsTabel.swift in Sources */,
+				CFA154E6233BA216003C588A /* NewsController.swift in Sources */,
 				CF70082D233A585E00A37040 /* Coordinator+Main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -326,8 +398,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = K8BB4F885A;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Tinkoff/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -335,6 +408,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "ilya-ocymare.Tinkoff";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -344,8 +418,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = K8BB4F885A;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Tinkoff/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -353,6 +428,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "ilya-ocymare.Tinkoff";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

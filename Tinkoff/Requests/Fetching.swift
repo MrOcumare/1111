@@ -9,19 +9,6 @@
 import Foundation
 import UIKit
 
-struct ResponseDecoder: Decodable {
-    var response : ArrayOfDecoder?
-}
-struct ArrayOfDecoder: Decodable {
-    var news : [ElementOfDecoder]
-}
-struct ElementOfDecoder: Decodable {
-    var id : String?
-    var title: String?
-    var slug: String?
-    var text: String?
-}
-
 func fetchData(_ pageSize: Int, _ pageOffset : Int) -> ResponseDecoder? {
     var newsArray = ResponseDecoder()
     print("enter")
@@ -29,7 +16,6 @@ func fetchData(_ pageSize: Int, _ pageOffset : Int) -> ResponseDecoder? {
         print("error")
         return nil
     }
-    
     let session = URLSession.shared
     let semaphore = DispatchSemaphore(value: 0)
     session.dataTask(with: url) { (data, response, error) in
@@ -38,7 +24,6 @@ func fetchData(_ pageSize: Int, _ pageOffset : Int) -> ResponseDecoder? {
         }
         do {
             newsArray = try JSONDecoder().decode(ResponseDecoder.self, from: data)
-            print(newsArray)
             semaphore.signal()
         } catch {
             print("error in decode json")
@@ -50,3 +35,29 @@ func fetchData(_ pageSize: Int, _ pageOffset : Int) -> ResponseDecoder? {
    
 }
 
+func fetchNews(_ slug: String) -> String {
+    var news = ResponseDecoderNews()
+    print("enter")
+    guard let url = URL(string: "https://cfg.tinkoff.ru/news/public/api/platform/v1/getArticle?urlSlug=\(slug)") else {
+        print("error")
+        return "error: \nPlease check internet connection"
+    }
+    
+    let session = URLSession.shared
+    let semaphore = DispatchSemaphore(value: 0)
+    session.dataTask(with: url) { (data, response, error) in
+        guard let data = data else {
+            return
+        }
+        do {
+            news = try JSONDecoder().decode(ResponseDecoderNews.self, from: data)
+            semaphore.signal()
+        } catch {
+            print("error in decode json")
+        }
+        }.resume()
+    
+    semaphore.wait()
+    let string = news.response?.text
+    return (cleanHTMLTags(string ?? "error: no test in news"))
+}

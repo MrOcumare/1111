@@ -7,15 +7,22 @@
 //
 
 import UIKit
+public protocol NewsLictControllerDelegate: class {
+    func navigateToNewsContoller()
+}
+
+var arrayOfNews = [News]()
 
 
 class NewsTabel : UIViewController {
-
-    var response = ResponseDecoder()
+    
+    
     var counting = 0
-    let newsTabel = UITableView()
+    lazy var newsTabel = UITableView()
     var safeArea: UILayoutGuide!
 
+    public weak var delegate: NewsLictControllerDelegate!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,8 +30,8 @@ class NewsTabel : UIViewController {
             print("error get array of data")
             return
         }
-        response = responseBuffer
-        print(response)
+        
+       addInNewsArray(responseBuffer)
         
         navigationItem.title = "Tinkoff News"
         self.navigationController?.navigationBar.barTintColor = .yellow
@@ -49,12 +56,15 @@ class NewsTabel : UIViewController {
 
 extension NewsTabel : UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (response.response?.news.count)!
+        return arrayOfNews.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = newsTabel.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath) as! NewsTabelCell
-        cell.label.text = response.response?.news[indexPath.row].title
+        
+        cell.label.text = arrayOfNews[indexPath.row].getTitle()
+        cell.dateLabel.text = dateStringFormat(arrayOfNews[indexPath.row].getDate())
+        cell.counterOfView.text = String(arrayOfNews[indexPath.row].getViewCount())
         return cell
     }
     
@@ -63,7 +73,31 @@ extension NewsTabel : UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        counting += 1
+        currentSegueData.currentSlug = arrayOfNews[indexPath.row].getSlug()
+        currentSegueData.currentNews = arrayOfNews[indexPath.row]
+        arrayOfNews[indexPath.row].incrimentViewCount()
         tableView.reloadData()
+        self.delegate.navigateToNewsContoller()
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        print()
+        let indexPreRefrash = arrayOfNews.count - 1
+        if indexPath.row == indexPreRefrash {
+            if let newPartArray = fetchData(20, arrayOfNews.count) {
+                addInNewsArray(newPartArray)
+                tableView.reloadData()
+            }
+        }
+        
+    }
+   
+}
+
+
+func addInNewsArray(_ decoder : ResponseDecoder) {
+    for getStruct in decoder.response!.news {
+        let fetchNews = News(id: getStruct.id!, date: getStruct.date!, slug: getStruct.slug!, title: getStruct.title!)
+        arrayOfNews.append(fetchNews)
     }
 }

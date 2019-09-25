@@ -19,7 +19,14 @@ class NewsTabelCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    let label : UILabel = {
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        label.text = nil
+        dateLabel.text = nil
+        counterOfView.text = nil
+    }
+    
+    lazy var label : UILabel = {
         let label = UILabel()
         label.layer.masksToBounds = true
         label.font = UIFont(name: "Roboto-Regular", size: 12)
@@ -29,7 +36,7 @@ class NewsTabelCell: UITableViewCell {
         return label
     }()
     
-    let dateLabel : UILabel =  {
+    lazy var dateLabel : UILabel =  {
         let dateLabel = UILabel()
         dateLabel.layer.masksToBounds = true
         dateLabel.font = UIFont(name: "Roboto-Regular", size: 6)
@@ -40,13 +47,13 @@ class NewsTabelCell: UITableViewCell {
         return dateLabel
     }()
     
-    let viewIcon : UIImageView = {
+    lazy var viewIcon : UIImageView = {
         let icon = UIImage(named: "remove_red_eye-24px")
         let viewIcon = UIImageView(image: icon)
         return viewIcon
     }()
     
-    let counterOfView : UILabel = {
+    lazy var counterOfView : UILabel = {
         let counterOfView = UILabel()
         counterOfView.layer.masksToBounds = true
         counterOfView.font = UIFont(name: "Roboto-Regular", size: 12)
@@ -54,8 +61,6 @@ class NewsTabelCell: UITableViewCell {
         counterOfView.text = "0"
         return counterOfView
     }()
-    
-//    remove_red_eye-24px
     
     func setupViews() {
         addSubview(label)
