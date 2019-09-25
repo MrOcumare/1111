@@ -16,6 +16,7 @@
 		CF700831233A58C100A37040 /* NewsTabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF700830233A58C100A37040 /* NewsTabel.swift */; };
 		CF700833233A592400A37040 /* getNews.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF700832233A592400A37040 /* getNews.swift */; };
 		CF700835233A5CEF00A37040 /* NewsTabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF700834233A5CEF00A37040 /* NewsTabelCell.swift */; };
+		CF70083B233B738C00A37040 /* Fetching.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF70083A233B738C00A37040 /* Fetching.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		CF700830233A58C100A37040 /* NewsTabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTabel.swift; sourceTree = "<group>"; };
 		CF700832233A592400A37040 /* getNews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getNews.swift; sourceTree = "<group>"; };
 		CF700834233A5CEF00A37040 /* NewsTabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTabelCell.swift; sourceTree = "<group>"; };
+		CF70083A233B738C00A37040 /* Fetching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fetching.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,8 @@
 		CF700816233A4B7300A37040 /* Tinkoff */ = {
 			isa = PBXGroup;
 			children = (
+				CF700839233B736400A37040 /* New Group */,
+				CF700836233ABAFA00A37040 /* Controllers */,
 				CF700817233A4B7300A37040 /* AppDelegate.swift */,
 				CF700821233A4B7500A37040 /* Assets.xcassets */,
 				CF700823233A4B7500A37040 /* LaunchScreen.storyboard */,
@@ -69,11 +73,42 @@
 				CF70081E233A4B7300A37040 /* Tinkoff.xcdatamodeld */,
 				CF70082C233A585E00A37040 /* Coordinator+Main.swift */,
 				CF70082E233A588600A37040 /* Coordinator+First.swift */,
-				CF700830233A58C100A37040 /* NewsTabel.swift */,
 				CF700832233A592400A37040 /* getNews.swift */,
-				CF700834233A5CEF00A37040 /* NewsTabelCell.swift */,
 			);
 			path = Tinkoff;
+			sourceTree = "<group>";
+		};
+		CF700836233ABAFA00A37040 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				CF700837233ABB1100A37040 /* NewsList+Controller */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		CF700837233ABB1100A37040 /* NewsList+Controller */ = {
+			isa = PBXGroup;
+			children = (
+				CF700830233A58C100A37040 /* NewsTabel.swift */,
+				CF700838233ABB2E00A37040 /* NewsList+Cell */,
+			);
+			path = "NewsList+Controller";
+			sourceTree = "<group>";
+		};
+		CF700838233ABB2E00A37040 /* NewsList+Cell */ = {
+			isa = PBXGroup;
+			children = (
+				CF700834233A5CEF00A37040 /* NewsTabelCell.swift */,
+			);
+			path = "NewsList+Cell";
+			sourceTree = "<group>";
+		};
+		CF700839233B736400A37040 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				CF70083A233B738C00A37040 /* Fetching.swift */,
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -147,6 +182,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF700820233A4B7300A37040 /* Tinkoff.xcdatamodeld in Sources */,
+				CF70083B233B738C00A37040 /* Fetching.swift in Sources */,
 				CF700833233A592400A37040 /* getNews.swift in Sources */,
 				CF70082F233A588600A37040 /* Coordinator+First.swift in Sources */,
 				CF700818233A4B7300A37040 /* AppDelegate.swift in Sources */,
