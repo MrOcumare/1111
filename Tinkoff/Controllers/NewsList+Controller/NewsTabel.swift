@@ -16,8 +16,8 @@ var arrayOfNews = [News]()
 
 class NewsTabel : UIViewController {
     
+    var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    var counting = 0
     lazy var newsTabel = UITableView()
     
     lazy var refreshControl: UIRefreshControl = {
