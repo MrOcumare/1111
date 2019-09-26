@@ -38,15 +38,8 @@ class NewsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-        titelView.text = currentSegueData.currentNews?.getTitle()
-        var text = ""
-        if currentSegueData.currentNews?.getText() == "" {
-            text = fetchNews((currentSegueData.currentNews?.getSlug())!)
-            currentSegueData.currentNews?.setText(text: text)
-        } else {
-            text = (currentSegueData.currentNews?.getText())!
-        }
-        textView.text = text
+        titelView.text = currentSegueData.currentTittle
+        textView.text = currentSegueData.currentText
         
         
         view.addSubview(titelView)

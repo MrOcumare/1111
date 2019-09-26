@@ -9,7 +9,8 @@
 import Foundation
 
 struct CurrentNewsSlug {
-    var currentSlug : String?
-    weak var currentNews : News?
+    var currentText : String?
+    var currentTittle : String?
+    
 }
 
