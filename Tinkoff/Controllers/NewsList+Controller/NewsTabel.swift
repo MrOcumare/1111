@@ -150,15 +150,16 @@ extension NewsTabel : UITableViewDataSource, UITableViewDelegate {
         
         let indexPreRefrash = user.corenews!.count - 1
         if indexPath.row == indexPreRefrash {
-            if let newPartArray = fetchData(20, arrayOfNews.count) {
+            if let newPartArray = fetchData(20, user.corenews!.count) {
                 user.corenews = addInNewsArray(newPartArray)
                 do {
                     try context.save()
                 } catch let error as NSError {
                     print("error in fers fetch : \(error.userInfo)")
                 }
-                tableView.reloadData()
+                
             }
+            tableView.reloadData()
         }
         
     }

@@ -2,7 +2,7 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14492.1" systemVersion="18F132" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CoreNews" representedClassName="CoreNews" syncable="YES">
         <attribute name="date" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" defaultValueString="default" syncable="YES"/>
         <attribute name="slug" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tittle" optional="YES" attributeType="String" syncable="YES"/>
@@ -15,6 +15,6 @@
     </entity>
     <elements>
         <element name="User" positionX="-235.625" positionY="68.1015625" width="128" height="73"/>
-        <element name="CoreNews" positionX="0" positionY="54" width="128" height="148"/>
+        <element name="CoreNews" positionX="18.9609375" positionY="-9.5234375" width="128" height="148"/>
     </elements>
 </model>
