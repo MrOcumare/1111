@@ -19,6 +19,18 @@ class NewsTabel : UIViewController {
     
     var counting = 0
     lazy var newsTabel = UITableView()
+    
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action:
+            #selector(handleRefresh(_:)),
+                                 for: UIControl.Event.valueChanged)
+        let title = NSLocalizedString("PullToRefresh", comment: "Pull to refresh")
+        refreshControl.attributedTitle = NSAttributedString(string: title)
+        
+        return refreshControl
+    }()
+    
     var safeArea: UILayoutGuide!
 
     public weak var delegate: NewsLictControllerDelegate!
@@ -37,6 +49,7 @@ class NewsTabel : UIViewController {
         self.navigationController?.navigationBar.barTintColor = .yellow
         safeArea = view.layoutMarginsGuide
         view.addSubview(newsTabel)
+        newsTabel.addSubview(refreshControl)
         setupTableView()
         newsTabel.delegate = (self as UITableViewDelegate)
         newsTabel.dataSource = (self as UITableViewDataSource)
@@ -91,6 +104,24 @@ extension NewsTabel : UITableViewDataSource, UITableViewDelegate {
         }
         
     }
+    
+    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
+        print("refrash")
+        
+        var i = 0
+        var isPullFinish = false
+        while isPullFinish == false {
+            guard let responseBuffer = fetchData(20, i) else {
+                print("error get array of data")
+                return
+            }
+            (isPullFinish, i) = addInArrayAfterPullRefrash(responseBuffer, i)
+        }
+        
+        
+        self.newsTabel.reloadData()
+        refreshControl.endRefreshing()
+    }
    
 }
 
@@ -100,4 +131,19 @@ func addInNewsArray(_ decoder : ResponseDecoder) {
         let fetchNews = News(id: getStruct.id!, date: getStruct.date!, slug: getStruct.slug!, title: getStruct.title!)
         arrayOfNews.append(fetchNews)
     }
+}
+
+func addInArrayAfterPullRefrash(_ decoder : ResponseDecoder, _ indexInArrayOfNews : Int) -> (Bool, Int) {
+    
+    var i = indexInArrayOfNews
+    for getStruct in decoder.response!.news {
+        let fetchNews = News(id: getStruct.id!, date: getStruct.date!, slug: getStruct.slug!, title: getStruct.title!)
+        if fetchNews.getId() == arrayOfNews[i].getId() {
+            return (true, 0)
+        } else {
+            arrayOfNews.insert(fetchNews, at: i)
+            i = i + 1
+        }
+    }
+    return (false, i)
 }
