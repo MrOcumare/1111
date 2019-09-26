@@ -115,7 +115,7 @@ extension NewsTabel : UITableViewDataSource, UITableViewDelegate {
                 print("error get array of data")
                 return
             }
-            (isPullFinish, i) = addInArrayAfterPullRefrash(responseBuffer, i)
+            (isPullFinish, i) = addInArrayAfterPullRefresh(responseBuffer, i)
         }
         
         
@@ -133,7 +133,7 @@ func addInNewsArray(_ decoder : ResponseDecoder) {
     }
 }
 
-func addInArrayAfterPullRefrash(_ decoder : ResponseDecoder, _ indexInArrayOfNews : Int) -> (Bool, Int) {
+func addInArrayAfterPullRefresh(_ decoder : ResponseDecoder, _ indexInArrayOfNews : Int) -> (Bool, Int) {
     
     var i = indexInArrayOfNews
     for getStruct in decoder.response!.news {
