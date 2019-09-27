@@ -31,9 +31,6 @@ class NewsTabel : UIViewController {
         refreshControl.addTarget(self, action:
             #selector(handleRefresh(_:)),
                                  for: UIControl.Event.valueChanged)
-        let title = NSLocalizedString("PullToRefresh", comment: "Pull to refresh")
-        refreshControl.attributedTitle = NSAttributedString(string: title)
-        
         return refreshControl
     }()
     
@@ -193,12 +190,14 @@ extension NewsTabel : UITableViewDataSource, UITableViewDelegate {
         
         
        
-        let deadline = DispatchTime.now() + .microseconds(500)
+        let deadline = DispatchTime.now() + .milliseconds(800)
         DispatchQueue.main.asyncAfter(deadline: deadline) {
             self.refreshControl.endRefreshing()
-             self.newsTabel.reloadData()
+            
         }
-        
+        self.newsTabel.reloadData()
+
+       
     }
    
     func addInNewsArray(_ decoder : ResponseDecoder) -> NSMutableOrderedSet {

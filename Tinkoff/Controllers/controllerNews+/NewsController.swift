@@ -67,7 +67,7 @@ class NewsController: UIViewController {
         self.view.backgroundColor = .white
         tittleLabel.text = currentSegueData.currentTittle ?? "error and panic in tittle"
         textLabel.text = String((currentSegueData.currentText ?? "error and panic in text")!.filter { !"\n\t\r".contains($0) })
-        dateLabel.text = currentSegueData.currentDate ?? "00.00.0000"
+        dateLabel.text = dateStringFormat(currentSegueData.currentDate ?? "00.00.0000")
     }
     
     func setupScrollView(){
