@@ -52,10 +52,12 @@ class NewsTabel : UIViewController {
                 user.name = userName
                 
                 guard let responseBuffer = fetchData(20, 0) else { print("error get array of data"); return }
-                
+                print(responseBuffer.response?.news.count)
                 user.corenews = addInNewsArray(responseBuffer)
                 do {
                     try context.save()
+                    
+                    print(user.corenews?.count)
                     
                 } catch let error as NSError {
                     print("error in fers fetch : \(error.userInfo)")
@@ -150,7 +152,7 @@ extension NewsTabel : UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
+
         let indexPreRefrash = user.corenews!.count - 1
         if indexPath.row == indexPreRefrash {
             if let newPartArray = fetchData(20, user.corenews!.count) {
@@ -160,11 +162,11 @@ extension NewsTabel : UITableViewDataSource, UITableViewDelegate {
                 } catch let error as NSError {
                     print("error in fers fetch : \(error.userInfo)")
                 }
-                
+
             }
             tableView.reloadData()
         }
-        
+
     }
     
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {

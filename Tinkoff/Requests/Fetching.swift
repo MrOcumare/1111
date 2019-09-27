@@ -11,7 +11,7 @@ import UIKit
 
 func fetchData(_ pageSize: Int, _ pageOffset : Int) -> ResponseDecoder? {
     var newsArray = ResponseDecoder()
-    
+    print(pageSize, pageOffset)
     guard let url = URL(string: "https://cfg.tinkoff.ru/news/public/api/platform/v1/getArticles?pageSize=\(pageSize)&pageOffset=\(pageOffset)") else {
         print("error")
         return nil

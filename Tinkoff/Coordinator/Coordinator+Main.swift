@@ -12,7 +12,6 @@ public protocol Coordinator : class {
     
     var childCoordinators: [Coordinator] { get set }
     
-    //    COMMENT(mrocumare): все Coordinator должны быть проинициализированы через UINavigationController
     init(navigationController:UINavigationController)
     
     func start()

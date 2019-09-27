@@ -48,10 +48,10 @@
 		CFA154EA233BB44A003C588A /* DecoderModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoderModels.swift; sourceTree = "<group>"; };
 		CFA154EC233BBDEC003C588A /* UtilsString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsString.swift; sourceTree = "<group>"; };
 		CFA154F1233BCD4C003C588A /* NewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
-		CFA15500233C5C6E003C588A /* CoreNews+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CoreNews+CoreDataClass.swift"; path = "Tinkoff/CoreNews+CoreDataClass.swift"; sourceTree = "<group>"; };
-		CFA15501233C5C6E003C588A /* CoreNews+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CoreNews+CoreDataProperties.swift"; path = "Tinkoff/CoreNews+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		CFA15502233C5C6E003C588A /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "User+CoreDataClass.swift"; path = "Tinkoff/User+CoreDataClass.swift"; sourceTree = "<group>"; };
-		CFA15503233C5C6E003C588A /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "User+CoreDataProperties.swift"; path = "Tinkoff/User+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CFA15500233C5C6E003C588A /* CoreNews+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreNews+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CFA15501233C5C6E003C588A /* CoreNews+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreNews+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CFA15502233C5C6E003C588A /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CFA15503233C5C6E003C588A /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,10 +68,6 @@
 		CF70080B233A4B7300A37040 = {
 			isa = PBXGroup;
 			children = (
-				CFA15500233C5C6E003C588A /* CoreNews+CoreDataClass.swift */,
-				CFA15501233C5C6E003C588A /* CoreNews+CoreDataProperties.swift */,
-				CFA15502233C5C6E003C588A /* User+CoreDataClass.swift */,
-				CFA15503233C5C6E003C588A /* User+CoreDataProperties.swift */,
 				CF700816233A4B7300A37040 /* Tinkoff */,
 				CF700815233A4B7300A37040 /* Products */,
 			);
@@ -177,6 +173,7 @@
 		CFA154EF233BC001003C588A /* CoreLayer */ = {
 			isa = PBXGroup;
 			children = (
+				CFA15508233E9AAC003C588A /* Model+CoreData */,
 			);
 			path = CoreLayer;
 			sourceTree = "<group>";
@@ -187,6 +184,17 @@
 				CF700817233A4B7300A37040 /* AppDelegate.swift */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		CFA15508233E9AAC003C588A /* Model+CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				CFA15500233C5C6E003C588A /* CoreNews+CoreDataClass.swift */,
+				CFA15501233C5C6E003C588A /* CoreNews+CoreDataProperties.swift */,
+				CFA15502233C5C6E003C588A /* User+CoreDataClass.swift */,
+				CFA15503233C5C6E003C588A /* User+CoreDataProperties.swift */,
+			);
+			path = "Model+CoreData";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
