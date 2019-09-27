@@ -2,7 +2,7 @@
 //  User+CoreDataProperties.swift
 //  Tinkoff
 //
-//  Created by Mr.Ocumare on 26/09/2019.
+//  Created by Mr.Ocumare on 27/09/2019.
 //  Copyright © 2019 Ilya Ocumare. All rights reserved.
 //
 //
@@ -17,6 +17,7 @@ extension User {
         return NSFetchRequest<User>(entityName: "User")
     }
 
+    @NSManaged public var incrementReq: Int64
     @NSManaged public var name: String?
     @NSManaged public var corenews: NSOrderedSet?
 

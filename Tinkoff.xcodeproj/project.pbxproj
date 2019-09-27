@@ -23,10 +23,10 @@
 		CFA154EB233BB44A003C588A /* DecoderModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA154EA233BB44A003C588A /* DecoderModels.swift */; };
 		CFA154ED233BBDEC003C588A /* UtilsString.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA154EC233BBDEC003C588A /* UtilsString.swift */; };
 		CFA154F2233BCD4C003C588A /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA154F1233BCD4C003C588A /* NewsModel.swift */; };
-		CFA15504233C5C6E003C588A /* CoreNews+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA15500233C5C6E003C588A /* CoreNews+CoreDataClass.swift */; };
-		CFA15505233C5C6E003C588A /* CoreNews+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA15501233C5C6E003C588A /* CoreNews+CoreDataProperties.swift */; };
-		CFA15506233C5C6E003C588A /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA15502233C5C6E003C588A /* User+CoreDataClass.swift */; };
-		CFA15507233C5C6E003C588A /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA15503233C5C6E003C588A /* User+CoreDataProperties.swift */; };
+		CFA15519233EAE7F003C588A /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA15515233EAE7F003C588A /* User+CoreDataClass.swift */; };
+		CFA1551A233EAE7F003C588A /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA15516233EAE7F003C588A /* User+CoreDataProperties.swift */; };
+		CFA1551B233EAE7F003C588A /* CoreNews+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA15517233EAE7F003C588A /* CoreNews+CoreDataClass.swift */; };
+		CFA1551C233EAE7F003C588A /* CoreNews+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA15518233EAE7F003C588A /* CoreNews+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,10 +48,10 @@
 		CFA154EA233BB44A003C588A /* DecoderModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoderModels.swift; sourceTree = "<group>"; };
 		CFA154EC233BBDEC003C588A /* UtilsString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsString.swift; sourceTree = "<group>"; };
 		CFA154F1233BCD4C003C588A /* NewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
-		CFA15500233C5C6E003C588A /* CoreNews+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreNews+CoreDataClass.swift"; sourceTree = "<group>"; };
-		CFA15501233C5C6E003C588A /* CoreNews+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreNews+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		CFA15502233C5C6E003C588A /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
-		CFA15503233C5C6E003C588A /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CFA15515233EAE7F003C588A /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CFA15516233EAE7F003C588A /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CFA15517233EAE7F003C588A /* CoreNews+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreNews+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CFA15518233EAE7F003C588A /* CoreNews+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreNews+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,10 +189,10 @@
 		CFA15508233E9AAC003C588A /* Model+CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				CFA15500233C5C6E003C588A /* CoreNews+CoreDataClass.swift */,
-				CFA15501233C5C6E003C588A /* CoreNews+CoreDataProperties.swift */,
-				CFA15502233C5C6E003C588A /* User+CoreDataClass.swift */,
-				CFA15503233C5C6E003C588A /* User+CoreDataProperties.swift */,
+				CFA15515233EAE7F003C588A /* User+CoreDataClass.swift */,
+				CFA15516233EAE7F003C588A /* User+CoreDataProperties.swift */,
+				CFA15517233EAE7F003C588A /* CoreNews+CoreDataClass.swift */,
+				CFA15518233EAE7F003C588A /* CoreNews+CoreDataProperties.swift */,
 			);
 			path = "Model+CoreData";
 			sourceTree = "<group>";
@@ -269,14 +269,12 @@
 			files = (
 				CFA154F2233BCD4C003C588A /* NewsModel.swift in Sources */,
 				CFA154E3233B853D003C588A /* UtilsDate.swift in Sources */,
-				CFA15504233C5C6E003C588A /* CoreNews+CoreDataClass.swift in Sources */,
+				CFA1551A233EAE7F003C588A /* User+CoreDataProperties.swift in Sources */,
 				CF700820233A4B7300A37040 /* Tinkoff.xcdatamodeld in Sources */,
 				CF70083B233B738C00A37040 /* Fetching.swift in Sources */,
+				CFA1551B233EAE7F003C588A /* CoreNews+CoreDataClass.swift in Sources */,
 				CF700833233A592400A37040 /* getNews.swift in Sources */,
 				CF70082F233A588600A37040 /* Coordinator+First.swift in Sources */,
-				CFA15505233C5C6E003C588A /* CoreNews+CoreDataProperties.swift in Sources */,
-				CFA15507233C5C6E003C588A /* User+CoreDataProperties.swift in Sources */,
-				CFA15506233C5C6E003C588A /* User+CoreDataClass.swift in Sources */,
 				CF700818233A4B7300A37040 /* AppDelegate.swift in Sources */,
 				CF700835233A5CEF00A37040 /* NewsTabelCell.swift in Sources */,
 				CFA154ED233BBDEC003C588A /* UtilsString.swift in Sources */,
@@ -285,6 +283,8 @@
 				CF700831233A58C100A37040 /* NewsTabel.swift in Sources */,
 				CFA154E6233BA216003C588A /* NewsController.swift in Sources */,
 				CF70082D233A585E00A37040 /* Coordinator+Main.swift in Sources */,
+				CFA15519233EAE7F003C588A /* User+CoreDataClass.swift in Sources */,
+				CFA1551C233EAE7F003C588A /* CoreNews+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

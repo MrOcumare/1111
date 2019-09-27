@@ -18,6 +18,8 @@ var arrayOfNews = [News]()
 
 class NewsTabel : UIViewController {
     
+    var lllll = 0
+    
     var user : User!
     
     var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -50,10 +52,10 @@ class NewsTabel : UIViewController {
             if results.isEmpty {
                 user = User(context: context)
                 user.name = userName
-                
                 guard let responseBuffer = fetchData(20, 0) else { print("error get array of data"); return }
                 print(responseBuffer.response?.news.count)
                 user.corenews = addInNewsArray(responseBuffer)
+                user.incrementReq = 20
                 do {
                     try context.save()
                     
@@ -131,7 +133,7 @@ extension NewsTabel : UITableViewDataSource, UITableViewDelegate {
                 return Int16(0)
             }
         }()
-        print(user.corenews![indexPath.row])
+       
         if (user.corenews![indexPath.row] as! CoreNews).text == nil {
             newsForAdd.text = fetchNews((newsList![indexPath.row] as AnyObject).slug!)
         } else {
@@ -153,10 +155,20 @@ extension NewsTabel : UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 
-        let indexPreRefrash = user.corenews!.count - 1
-        if indexPath.row == indexPreRefrash {
-            if let newPartArray = fetchData(20, user.corenews!.count) {
+        let lastSectionIndex = tableView.numberOfSections - 1
+        let lastRowIndex = tableView.numberOfRows(inSection: lastSectionIndex) - 1
+        if indexPath.section ==  lastSectionIndex && indexPath.row == lastRowIndex {
+            print("this is the last cell")
+            let spinner = UIActivityIndicatorView(style: .gray)
+            spinner.startAnimating()
+            spinner.frame = CGRect(x: CGFloat(0), y: CGFloat(0), width: tableView.bounds.width, height: CGFloat(44))
+            
+            self.newsTabel.tableFooterView = spinner
+            self.newsTabel.tableFooterView?.isHidden = false
+            
+            if let newPartArray = fetchData(20, Int(user!.incrementReq)) {
                 user.corenews = addInNewsArray(newPartArray)
+                user.incrementReq = user.incrementReq + 20
                 do {
                     try context.save()
                 } catch let error as NSError {
@@ -164,18 +176,25 @@ extension NewsTabel : UITableViewDataSource, UITableViewDelegate {
                 }
 
             }
-            tableView.reloadData()
+            let deadline = DispatchTime.now() + .milliseconds(800)
+            DispatchQueue.main.asyncAfter(deadline: deadline) {
+                spinner.startAnimating()
+                self.newsTabel.tableFooterView?.isHidden = true
+                tableView.reloadData()
+            }
         }
-
     }
     
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
         print("refrash")
+        print(user.corenews!.count)
+        
         
         var i = 0
+        var j = 0
         var isPullFinish = false
         while isPullFinish == false {
-            guard let responseBuffer = fetchData(20, i) else {
+            guard let responseBuffer = fetchData(20, j) else {
                 print("error get array of data")
                 return
             }
@@ -188,8 +207,17 @@ extension NewsTabel : UITableViewDataSource, UITableViewDelegate {
             } catch let error as NSError {
                 print("error in pull-to-refrash block : \(error.userInfo)")
             }
+            j = j + 20
         }
         
+        if j > 20 {
+            user.incrementReq = user.incrementReq + Int64((j / 20))
+            do {
+                try context.save()
+            } catch let error as NSError {
+                print("error in pull-to-refrash block when resave incrementRequest: \(error.userInfo)")
+            }
+        }
         
        
         let deadline = DispatchTime.now() + .milliseconds(800)
