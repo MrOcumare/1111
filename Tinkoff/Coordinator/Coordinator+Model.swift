@@ -11,6 +11,6 @@ import Foundation
 struct CurrentNewsSlug {
     var currentText : String?
     var currentTittle : String?
-    
+    var currentDate : String?
 }
 

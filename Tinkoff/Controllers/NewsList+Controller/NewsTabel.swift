@@ -125,7 +125,13 @@ extension NewsTabel : UITableViewDataSource, UITableViewDelegate {
         newsForAdd.slug = (newsList![indexPath.row] as AnyObject).slug
         newsForAdd.id = (newsList![indexPath.row] as AnyObject).id
         newsForAdd.tittle = (newsList![indexPath.row] as AnyObject).tittle
-        newsForAdd.viewCount = (newsList![indexPath.row] as AnyObject).viewCount + 1
+        newsForAdd.viewCount = {
+            if (newsList![indexPath.row] as AnyObject).viewCount + 1 < Int16.max {
+                return (newsList![indexPath.row] as AnyObject).viewCount + 1
+            } else {
+                return Int16(0)
+            }
+        }()
         print(user.corenews![indexPath.row])
         if (user.corenews![indexPath.row] as! CoreNews).text == nil {
             newsForAdd.text = fetchNews((newsList![indexPath.row] as AnyObject).slug!)
@@ -141,7 +147,7 @@ extension NewsTabel : UITableViewDataSource, UITableViewDelegate {
         }
         currentSegueData.currentText =  (user.corenews![indexPath.row] as AnyObject).text!
         currentSegueData.currentTittle = (user.corenews![indexPath.row] as AnyObject).tittle!
-        
+        currentSegueData.currentDate = (user.corenews![indexPath.row] as AnyObject).date!
         tableView.reloadData()
         self.delegate.navigateToNewsContoller()
     }
@@ -177,17 +183,22 @@ extension NewsTabel : UITableViewDataSource, UITableViewDelegate {
             var bufferList = NSMutableOrderedSet()
             (isPullFinish, i, bufferList) = addInArrayAfterPullRefresh(responseBuffer, i)
             user.corenews = bufferList
+            
             do {
                 try context.save()
-                
             } catch let error as NSError {
                 print("error in pull-to-refrash block : \(error.userInfo)")
             }
         }
         
         
-        self.newsTabel.reloadData()
-        refreshControl.endRefreshing()
+       
+        let deadline = DispatchTime.now() + .microseconds(500)
+        DispatchQueue.main.asyncAfter(deadline: deadline) {
+            self.refreshControl.endRefreshing()
+             self.newsTabel.reloadData()
+        }
+        
     }
    
     func addInNewsArray(_ decoder : ResponseDecoder) -> NSMutableOrderedSet {
