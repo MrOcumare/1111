@@ -31,6 +31,7 @@ class NewsTabelCell: UITableViewCell {
         label.layer.masksToBounds = true
         label.font = UIFont(name: "Roboto-Regular", size: 12)
         label.textAlignment = .left
+        label.sizeToFit()
         label.text = "Тинькофф подписал спонсорский контракт с первой ракеткой России Даниилом Медведевым"
         label.numberOfLines = 0
         return label

@@ -11,7 +11,7 @@ import UIKit
 
 func fetchData(_ pageSize: Int, _ pageOffset : Int) -> ResponseDecoder? {
     var newsArray = ResponseDecoder()
-    print("enter")
+    print(pageSize, pageOffset)
     guard let url = URL(string: "https://cfg.tinkoff.ru/news/public/api/platform/v1/getArticles?pageSize=\(pageSize)&pageOffset=\(pageOffset)") else {
         print("error")
         return nil
@@ -37,7 +37,6 @@ func fetchData(_ pageSize: Int, _ pageOffset : Int) -> ResponseDecoder? {
 
 func fetchNews(_ slug: String) -> String {
     var news = ResponseDecoderNews()
-    print("enter")
     guard let url = URL(string: "https://cfg.tinkoff.ru/news/public/api/platform/v1/getArticle?urlSlug=\(slug)") else {
         print("error")
         return "error: \nPlease check internet connection"
