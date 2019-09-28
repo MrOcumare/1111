@@ -13,12 +13,8 @@ public protocol NewsLictControllerDelegate: class {
     func navigateToNewsContoller()
 }
 
-var arrayOfNews = [News]()
-
-
 class NewsTabel : UIViewController {
     
-    var lllll = 0
     
     var user : User!
     
@@ -43,6 +39,8 @@ class NewsTabel : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        //    COMMENT(mrocumare): если добавить сюда елементарную авторизацию, то можно хранить новости конкретного пользователя
         let userName = "user"
         let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "name = %@", userName)
@@ -53,14 +51,10 @@ class NewsTabel : UIViewController {
                 user = User(context: context)
                 user.name = userName
                 guard let responseBuffer = fetchData(20, 0) else { print("error get array of data"); return }
-                print(responseBuffer.response?.news.count)
                 user.corenews = addInNewsArray(responseBuffer)
                 user.incrementReq = 20
                 do {
                     try context.save()
-                    
-                    print(user.corenews?.count)
-                    
                 } catch let error as NSError {
                     print("error in fers fetch : \(error.userInfo)")
                 }
@@ -70,8 +64,6 @@ class NewsTabel : UIViewController {
         } catch let error as NSError {
             print(error.userInfo)
         }
-        
-        
         
         navigationItem.title = "Tinkoff News"
         self.navigationController?.navigationBar.barTintColor = .yellow
@@ -117,6 +109,7 @@ extension NewsTabel : UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150
     }
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -186,20 +179,16 @@ extension NewsTabel : UITableViewDataSource, UITableViewDelegate {
     }
     
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
-        print("refrash")
-        print(user.corenews!.count)
-        
-        
-        var i = 0
-        var j = 0
+        var positionInArrayContext = 0
+        var incrementRequest = 0
         var isPullFinish = false
         while isPullFinish == false {
-            guard let responseBuffer = fetchData(20, j) else {
+            guard let responseBuffer = fetchData(20, incrementRequest) else {
                 print("error get array of data")
                 return
             }
             var bufferList = NSMutableOrderedSet()
-            (isPullFinish, i, bufferList) = addInArrayAfterPullRefresh(responseBuffer, i)
+            (isPullFinish, positionInArrayContext, bufferList) = addInArrayAfterPullRefresh(responseBuffer, positionInArrayContext)
             user.corenews = bufferList
             
             do {
@@ -207,11 +196,11 @@ extension NewsTabel : UITableViewDataSource, UITableViewDelegate {
             } catch let error as NSError {
                 print("error in pull-to-refrash block : \(error.userInfo)")
             }
-            j = j + 20
+            incrementRequest = incrementRequest + 20
         }
         
-        if j > 20 {
-            user.incrementReq = user.incrementReq + Int64((j / 20))
+        if incrementRequest > 20 {
+            user.incrementReq = user.incrementReq + Int64((incrementRequest / 20))
             do {
                 try context.save()
             } catch let error as NSError {
@@ -247,9 +236,9 @@ extension NewsTabel : UITableViewDataSource, UITableViewDelegate {
     
     func addInArrayAfterPullRefresh(_ decoder : ResponseDecoder, _ indexInArrayOfNews : Int) -> (Bool, Int, NSMutableOrderedSet) {
         let newsList = user.corenews?.mutableCopy() as? NSMutableOrderedSet
-        var i = indexInArrayOfNews
+        var indexInArrayOfNewsBuffer = indexInArrayOfNews
         for getStruct in decoder.response!.news {
-            if getStruct.slug == (newsList![i] as AnyObject).slug {
+            if getStruct.id == (newsList![indexInArrayOfNewsBuffer] as AnyObject).id {
                 return (true, 0, newsList!)
             } else {
                 let newsForAdd = CoreNews(context: context)
@@ -258,11 +247,11 @@ extension NewsTabel : UITableViewDataSource, UITableViewDelegate {
                 newsForAdd.slug = getStruct.slug!
                 newsForAdd.viewCount = 0
                 newsForAdd.tittle = getStruct.title!
-                newsList?.insert(newsForAdd, at: i)
-                i = i + 1
+                newsList?.insert(newsForAdd, at: indexInArrayOfNewsBuffer)
+                indexInArrayOfNewsBuffer = indexInArrayOfNewsBuffer + 1
             }
         }
-        return (false, i, newsList!)
+        return (false, indexInArrayOfNewsBuffer, newsList!)
     }
 }
 
