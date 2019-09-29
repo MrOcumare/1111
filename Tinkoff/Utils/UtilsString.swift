@@ -9,8 +9,11 @@
 import Foundation
 
 
-func cleanHTMLTags(_ str : String) -> String {
-    var string = str.replacingOccurrences(of: "<[^>]+>", with: "", options: String.CompareOptions.regularExpression, range: nil)
-    string = string.replacingOccurrences(of: "&[^;]+;", with: "", options: String.CompareOptions.regularExpression, range: nil)
-    return string
+public class StringUtils {
+    class func cleanHTMLTags(_ str : String) -> String {
+        var string = str.replacingOccurrences(of: "<[^>]+>", with: "", options: String.CompareOptions.regularExpression, range: nil)
+        string = string.replacingOccurrences(of: "&[^;]+;", with: "", options: String.CompareOptions.regularExpression, range: nil)
+        return string
+    }
 }
+

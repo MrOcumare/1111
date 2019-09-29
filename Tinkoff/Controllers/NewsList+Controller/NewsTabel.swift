@@ -87,7 +87,7 @@ extension NewsTabelController : UITableViewDataSource, UITableViewDelegate {
             return cell
         }
         cell.label.text = tittle
-        cell.dateLabel.text = dateStringFormat(date)
+        cell.dateLabel.text = DataUtils.dateStringFormat(date)
         cell.counterOfView.text = String(viewCount)
         return cell
     }
@@ -146,7 +146,6 @@ extension NewsTabelController : UITableViewDataSource, UITableViewDelegate {
         if CheckInternet.Connection() {
             let lastSectionIndex = tableView.numberOfSections - 1
             let lastRowIndex = tableView.numberOfRows(inSection: lastSectionIndex) - 1
-            let spinner = UIActivityIndicatorView(style: .gray)
             if indexPath.section ==  lastSectionIndex && indexPath.row == lastRowIndex {
                 print("this is the last cell")
                 let spinner = UIActivityIndicatorView(style: .gray)
@@ -172,6 +171,19 @@ extension NewsTabelController : UITableViewDataSource, UITableViewDelegate {
                 let index = NSIndexPath(row: indexPath.row, section: 0)
                 self.newsTabel.scrollToRow(at: index as IndexPath, at: .top, animated: true)
             }
+        }  else {
+            let footerLabel : UILabel =  {
+                let footerLabel = UILabel()
+                footerLabel.layer.masksToBounds = true
+                footerLabel.font = UIFont(name: "Roboto-Regular", size: 6)
+                footerLabel.textAlignment = .center
+                footerLabel.text = "Please check internet connection"
+                footerLabel.textColor = UIColor.black.withAlphaComponent(0.7)
+                return footerLabel
+            }()
+            footerLabel.frame = CGRect(x: CGFloat(0), y: CGFloat(0), width: tableView.bounds.width, height: CGFloat(44))
+            self.newsTabel.tableFooterView = footerLabel
+            self.newsTabel.tableFooterView?.isHidden = false
         }
     }
     

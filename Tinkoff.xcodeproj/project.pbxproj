@@ -82,8 +82,8 @@
 		CF700816233A4B7300A37040 /* Tinkoff */ = {
 			isa = PBXGroup;
 			children = (
-				CFDDE7E42340272300EA58F1 /* CheckInternetConnection */,
 				CFA154F0233BC016003C588A /* App */,
+				CFDDE7E42340272300EA58F1 /* CheckInternetConnection */,
 				CFA154EF233BC001003C588A /* CoreLayer */,
 				CFA154E7233BA9AA003C588A /* Coordinator */,
 				CF70083C233B84F300A37040 /* Utils */,

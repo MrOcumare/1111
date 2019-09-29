@@ -58,5 +58,5 @@ func fetchNews(_ slug: String) -> String {
     
     semaphore.wait()
     let string = news.response?.text
-    return (cleanHTMLTags(string ?? "error: no test in news"))
+    return (StringUtils.cleanHTMLTags(string ?? "error: no test in news"))
 }
