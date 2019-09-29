@@ -23,13 +23,13 @@ class FirstCoordinator: Coordinator {
     func start() {
         let newsListController : NewsTabelController = NewsTabelController()
         newsListController.delegate = self
-        self.navigationController.viewControllers = [newsListController]
+        self.navigationController.pushViewController(newsListController, animated: true)
     }
 }
 extension FirstCoordinator: NewsLictControllerDelegate {
     func navigateToNewsContoller() {
         let newsController : NewsController = NewsController()
         newsController.delegate = self
-        self.navigationController.viewControllers.append(newsController)
+        self.navigationController.pushViewController(newsController, animated: true)
     }
 }

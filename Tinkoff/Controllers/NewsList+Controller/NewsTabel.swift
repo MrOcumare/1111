@@ -15,7 +15,6 @@ public protocol NewsLictControllerDelegate: class {
 
 class NewsTabelController : UIViewController {
     
-    
     var user : User!
     
     var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -82,12 +81,12 @@ extension NewsTabelController : UITableViewDataSource, UITableViewDelegate {
             print("error")
             return cell
         }
-        guard let news = user.corenews?[indexPath.row] as? CoreNews, let tittle = news.tittle, let date = news.date, let viewCount = news.viewCount as? Int16 else {
+        guard let news = user.corenews?[indexPath.row] as? CoreNews, let title = news.tittle, let date = news.date, let viewCount = news.viewCount as? Int16 else {
             print("error")
             return cell
         }
-        cell.label.text = tittle
-        cell.dateLabel.text = DataUtils.dateStringFormat(date)
+        cell.label.text = title
+        cell.dateLabel.text = DateUtils.dateStringFormat(date)
         cell.counterOfView.text = String(viewCount)
         return cell
     }
@@ -114,7 +113,7 @@ extension NewsTabelController : UITableViewDataSource, UITableViewDelegate {
             }()
             
             if (user.corenews![indexPath.row] as! CoreNews).text == nil {
-                newsForAdd.text = fetchNews((newsList![indexPath.row] as AnyObject).slug!)
+                newsForAdd.text = FetchNews.fetchNews((newsList![indexPath.row] as AnyObject).slug!)
             } else {
                 newsForAdd.text = (newsList![indexPath.row] as AnyObject).text!
             }
@@ -129,7 +128,7 @@ extension NewsTabelController : UITableViewDataSource, UITableViewDelegate {
             
             
             currentSegueData.currentText =  (user.corenews![indexPath.row] as AnyObject).text!
-            currentSegueData.currentTittle = (user.corenews![indexPath.row] as AnyObject).tittle!
+            currentSegueData.currentTitle = (user.corenews![indexPath.row] as AnyObject).tittle!
             currentSegueData.currentDate = (user.corenews![indexPath.row] as AnyObject).date!
             
             tableView.reloadData()
@@ -153,7 +152,7 @@ extension NewsTabelController : UITableViewDataSource, UITableViewDelegate {
                 spinner.frame = CGRect(x: CGFloat(0), y: CGFloat(0), width: tableView.bounds.width, height: CGFloat(44))
                 self.newsTabel.tableFooterView = spinner
                 self.newsTabel.tableFooterView?.isHidden = false
-                if let newPartArray = fetchData(20, Int(user!.incrementReq)) {
+                if let newPartArray = FetchNews.fetchData(20, Int(user!.incrementReq)) {
                     user.corenews = addInNewsArray(newPartArray)
                     user.incrementReq = user.incrementReq + 20
                     do {
@@ -194,7 +193,7 @@ extension NewsTabelController : UITableViewDataSource, UITableViewDelegate {
             var isPullFinish = false
             if user != nil {
                 while isPullFinish == false {
-                    guard let responseBuffer = fetchData(20, incrementRequest) else {
+                    guard let responseBuffer = FetchNews.fetchData(20, incrementRequest) else {
                         print("error get array of data")
                         return
                     }
@@ -287,7 +286,7 @@ extension NewsTabelController : UITableViewDataSource, UITableViewDelegate {
                 if CheckInternet.Connection() {
                     user = User(context: context)
                     user.name = userName
-                    guard let responseBuffer = fetchData(20, 0) else { print("error get array of data"); return }
+                    guard let responseBuffer = FetchNews.fetchData(20, 0) else { print("error get array of data"); return }
                     user.corenews = addInNewsArray(responseBuffer)
                     user.incrementReq = 20
                     do {

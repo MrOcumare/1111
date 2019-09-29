@@ -19,7 +19,7 @@ class NewsController: UIViewController {
     
     var safeArea: UILayoutGuide!
     
-    lazy var tittleLabel: UILabel = {
+    lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 30)
         label.textAlignment = .center
@@ -56,7 +56,7 @@ class NewsController: UIViewController {
         
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
-        contentView.addSubview(tittleLabel)
+        contentView.addSubview(titleLabel)
         contentView.addSubview(textLabel)
         contentView.addSubview(dateLabel)
         
@@ -65,9 +65,9 @@ class NewsController: UIViewController {
         setupViews()
         setupDate()
         self.view.backgroundColor = .white
-        tittleLabel.text = currentSegueData.currentTittle ?? "error and panic in tittle"
+        titleLabel.text = currentSegueData.currentTitle ?? "error and panic in title"
         textLabel.text = String((currentSegueData.currentText ?? "error and panic in text")!.filter { !"\n\t\r".contains($0) })
-        dateLabel.text = DataUtils.dateStringFormat(currentSegueData.currentDate ?? "00.00.0000")
+        dateLabel.text = DateUtils.dateStringFormat(currentSegueData.currentDate ?? "00.00.0000")
     }
     
     func setupScrollView(){
@@ -87,14 +87,14 @@ class NewsController: UIViewController {
     }
     
     func setupViews(){
-        contentView.addSubview(tittleLabel)
-        tittleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        tittleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 50).isActive = true
-        tittleLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 3/4).isActive = true
+        contentView.addSubview(titleLabel)
+        titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 50).isActive = true
+        titleLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 3/4).isActive = true
         
         contentView.addSubview(textLabel)
         textLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        textLabel.topAnchor.constraint(equalTo: tittleLabel.bottomAnchor, constant: 25).isActive = true
+        textLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 25).isActive = true
         textLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 5/6).isActive = true
     }
     

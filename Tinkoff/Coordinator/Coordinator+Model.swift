@@ -10,7 +10,7 @@ import Foundation
 
 struct CurrentNewsSlug {
     var currentText : String?
-    var currentTittle : String?
+    var currentTitle : String?
     var currentDate : String?
 }
 

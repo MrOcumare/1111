@@ -22,7 +22,6 @@ struct ElementOfDecoder: Decodable {
     var date: String?
 }
 
-
 //    COMMENT(mrocumare): for get text by slug
 struct ResponseDecoderNews: Decodable {
     var response : ElementOfDecoderNews?
