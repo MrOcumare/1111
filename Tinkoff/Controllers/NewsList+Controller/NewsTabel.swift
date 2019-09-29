@@ -102,6 +102,7 @@ extension NewsTabelController : UITableViewDataSource, UITableViewDelegate {
        
         let newsList = user.corenews?.mutableCopy() as? NSMutableOrderedSet
         let newsForAdd = CoreNews(context: context)
+        
         if CheckInternet.Connection() || (user.corenews![indexPath.row] as! CoreNews).text != nil {
             newsForAdd.date = (newsList![indexPath.row] as AnyObject).date
             newsForAdd.slug = (newsList![indexPath.row] as AnyObject).slug
@@ -330,7 +331,7 @@ extension NewsTabelController : UITableViewDataSource, UITableViewDelegate {
         newsForUpdate.slug = (newsList![indexPath.row] as AnyObject).slug
         newsForUpdate.viewCount = (newsList![indexPath.row] as AnyObject).viewCount
         newsForUpdate.tittle = (newsList![indexPath.row] as AnyObject).tittle
-       
+        newsForUpdate.text = nil
         newsForUpdate.isupload = false
         
         
@@ -338,8 +339,6 @@ extension NewsTabelController : UITableViewDataSource, UITableViewDelegate {
         user.corenews = newsList
         do {
             try context.save()
-            
-            print("dsfdsfdfs")
         } catch let error as NSError {
             print("error in dell fetch : \(error.userInfo)")
         }
