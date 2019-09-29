@@ -278,7 +278,7 @@ extension NewsTabelController : UITableViewDataSource, UITableViewDelegate {
     
     func Alert (Message: String){
         
-        let alert = UIAlertController(title: "Alert", message: Message, preferredStyle: UIAlertController.Style.alert)
+        let alert = UIAlertController(title: "Achtung", message: Message, preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "ok", style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
         

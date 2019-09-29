@@ -24,6 +24,7 @@ class NewsTabelCell: UITableViewCell {
         label.text = nil
         dateLabel.text = nil
         counterOfView.text = nil
+        viewIconIsUpload.isHidden = true
     }
     
     lazy var label : UILabel = {
