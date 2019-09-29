@@ -51,7 +51,12 @@ class NewsTabelCell: UITableViewCell {
         return viewIcon
     }()
     
-    
+    lazy var viewIconIsUpload : UIImageView = {
+        let icon = UIImage(named: "isupload")
+        let viewIconIsUpload = UIImageView(image: icon)
+        viewIconIsUpload.isHidden = true
+        return viewIconIsUpload
+    }()
     
     lazy var counterOfView : UILabel = {
         let counterOfView = UILabel()
@@ -66,10 +71,12 @@ class NewsTabelCell: UITableViewCell {
         addSubview(dateLabel)
         addSubview(viewIcon)
         addSubview(counterOfView)
+        addSubview(viewIconIsUpload)
         setupLabel()
         setupDateLabel()
         setupIcon()
         setupCounter()
+        setupViewIconIsUpload()
         
     }
     
@@ -102,7 +109,15 @@ class NewsTabelCell: UITableViewCell {
         counterOfView.leftAnchor.constraint(equalTo: viewIcon.rightAnchor, constant:  8).isActive = true
         counterOfView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 0).isActive = true
         counterOfView.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        label.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20).isActive = true
+        
+    }
+    
+    func setupViewIconIsUpload() {
+        viewIconIsUpload.translatesAutoresizingMaskIntoConstraints = false
+        viewIconIsUpload.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20).isActive = true
+        viewIconIsUpload.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 0).isActive = true
+        viewIconIsUpload.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        viewIconIsUpload.widthAnchor.constraint(equalToConstant: 20).isActive = true
     }
     
 }

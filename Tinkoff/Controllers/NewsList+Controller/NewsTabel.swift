@@ -81,9 +81,12 @@ extension NewsTabelController : UITableViewDataSource, UITableViewDelegate {
             print("error")
             return cell
         }
-        guard let news = user.corenews?[indexPath.row] as? CoreNews, let title = news.tittle, let date = news.date, let viewCount = news.viewCount as? Int16 else {
+        guard let news = user.corenews?[indexPath.row] as? CoreNews, let title = news.tittle, let date = news.date, let viewCount = news.viewCount as? Int16, let isupload = news.isupload as? Bool else {
             print("error")
             return cell
+        }
+        if isupload {
+            cell.viewIconIsUpload.isHidden = false
         }
         cell.label.text = title
         cell.dateLabel.text = DateUtils.dateStringFormat(date)
@@ -96,7 +99,7 @@ extension NewsTabelController : UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+       
         let newsList = user.corenews?.mutableCopy() as? NSMutableOrderedSet
         let newsForAdd = CoreNews(context: context)
         if CheckInternet.Connection() || (user.corenews![indexPath.row] as! CoreNews).text != nil {
@@ -104,6 +107,7 @@ extension NewsTabelController : UITableViewDataSource, UITableViewDelegate {
             newsForAdd.slug = (newsList![indexPath.row] as AnyObject).slug
             newsForAdd.id = (newsList![indexPath.row] as AnyObject).id
             newsForAdd.tittle = (newsList![indexPath.row] as AnyObject).tittle
+            newsForAdd.isupload = true
             newsForAdd.viewCount = {
                 if (newsList![indexPath.row] as AnyObject).viewCount + 1 < Int16.max {
                     return (newsList![indexPath.row] as AnyObject).viewCount + 1
@@ -112,7 +116,7 @@ extension NewsTabelController : UITableViewDataSource, UITableViewDelegate {
                 }
             }()
             
-            if (user.corenews![indexPath.row] as! CoreNews).text == nil {
+            if (user.corenews![indexPath.row] as! CoreNews).isupload != true {
                 newsForAdd.text = FetchNews.fetchNews((newsList![indexPath.row] as AnyObject).slug!)
             } else {
                 newsForAdd.text = (newsList![indexPath.row] as AnyObject).text!
@@ -243,6 +247,8 @@ extension NewsTabelController : UITableViewDataSource, UITableViewDelegate {
             newsForAdd.slug = getStruct.slug!
             newsForAdd.viewCount = 0
             newsForAdd.tittle = getStruct.title!
+            newsForAdd.isupload = false
+            
             newsList?.add(newsForAdd)
             
         }
@@ -262,6 +268,7 @@ extension NewsTabelController : UITableViewDataSource, UITableViewDelegate {
                 newsForAdd.slug = getStruct.slug!
                 newsForAdd.viewCount = 0
                 newsForAdd.tittle = getStruct.title!
+                newsForAdd.isupload = false
                 newsList?.insert(newsForAdd, at: indexInArrayOfNewsBuffer)
                 indexInArrayOfNewsBuffer = indexInArrayOfNewsBuffer + 1
             }
@@ -305,6 +312,45 @@ extension NewsTabelController : UITableViewDataSource, UITableViewDelegate {
             print(error.userInfo)
         }
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        let newsList = user.corenews?.mutableCopy() as? NSMutableOrderedSet
+        let newsForUpdate = CoreNews(context: context)
+        if (newsList![indexPath.row] as AnyObject).isupload == false {
+           self.Alert(Message: "News text has already been deleted")
+           return
+        }
+        newsForUpdate.date = (newsList![indexPath.row] as AnyObject).date
+        newsForUpdate.id = (newsList![indexPath.row] as AnyObject).id
+        newsForUpdate.slug = (newsList![indexPath.row] as AnyObject).slug
+        newsForUpdate.viewCount = (newsList![indexPath.row] as AnyObject).viewCount
+        newsForUpdate.tittle = (newsList![indexPath.row] as AnyObject).tittle
+       
+        newsForUpdate.isupload = false
+        
+        
+        newsList![indexPath.row] = newsForUpdate
+        user.corenews = newsList
+        do {
+            try context.save()
+            
+            print("dsfdsfdfs")
+        } catch let error as NSError {
+            print("error in dell fetch : \(error.userInfo)")
+        }
+        
+        if let ratableCell = tableView.cellForRow(at: indexPath) as? NewsTabelCell {
+            ratableCell.viewIconIsUpload.isHidden = true
+        }
+        
+        
+    }
+    
 }
 
 

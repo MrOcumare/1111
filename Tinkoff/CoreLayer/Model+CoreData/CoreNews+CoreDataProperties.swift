@@ -2,7 +2,7 @@
 //  CoreNews+CoreDataProperties.swift
 //  Tinkoff
 //
-//  Created by Mr.Ocumare on 27/09/2019.
+//  Created by Mr.Ocumare on 29/09/2019.
 //  Copyright © 2019 Ilya Ocumare. All rights reserved.
 //
 //
@@ -23,6 +23,7 @@ extension CoreNews {
     @NSManaged public var text: String?
     @NSManaged public var tittle: String?
     @NSManaged public var viewCount: Int16
+    @NSManaged public var isupload: Bool
     @NSManaged public var user: User?
 
 }

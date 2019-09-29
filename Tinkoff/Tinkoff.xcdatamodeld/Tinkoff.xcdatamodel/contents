@@ -3,6 +3,7 @@
     <entity name="CoreNews" representedClassName="CoreNews" syncable="YES">
         <attribute name="date" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="String" defaultValueString="default"/>
+        <attribute name="isupload" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="slug" optional="YES" attributeType="String"/>
         <attribute name="text" optional="YES" attributeType="String"/>
         <attribute name="tittle" optional="YES" attributeType="String"/>
@@ -15,7 +16,7 @@
         <relationship name="corenews" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="CoreNews" inverseName="user" inverseEntity="CoreNews"/>
     </entity>
     <elements>
-        <element name="CoreNews" positionX="18.9609375" positionY="-9.5234375" width="128" height="148"/>
+        <element name="CoreNews" positionX="18.9609375" positionY="-9.5234375" width="128" height="163"/>
         <element name="User" positionX="-235.625" positionY="68.1015625" width="128" height="90"/>
     </elements>
 </model>

@@ -21,11 +21,11 @@
 		CFA154E9233BB07A003C588A /* Coordinator+Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA154E8233BB07A003C588A /* Coordinator+Model.swift */; };
 		CFA154EB233BB44A003C588A /* DecoderModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA154EA233BB44A003C588A /* DecoderModels.swift */; };
 		CFA154ED233BBDEC003C588A /* UtilsString.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA154EC233BBDEC003C588A /* UtilsString.swift */; };
-		CFA15519233EAE7F003C588A /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA15515233EAE7F003C588A /* User+CoreDataClass.swift */; };
-		CFA1551A233EAE7F003C588A /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA15516233EAE7F003C588A /* User+CoreDataProperties.swift */; };
-		CFA1551B233EAE7F003C588A /* CoreNews+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA15517233EAE7F003C588A /* CoreNews+CoreDataClass.swift */; };
-		CFA1551C233EAE7F003C588A /* CoreNews+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA15518233EAE7F003C588A /* CoreNews+CoreDataProperties.swift */; };
 		CFDDE7E62340276000EA58F1 /* InternetConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDDE7E52340276000EA58F1 /* InternetConnection.swift */; };
+		CFDDE7ED2341436E00EA58F1 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDDE7E92341436E00EA58F1 /* User+CoreDataClass.swift */; };
+		CFDDE7EE2341436E00EA58F1 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDDE7EA2341436E00EA58F1 /* User+CoreDataProperties.swift */; };
+		CFDDE7EF2341436E00EA58F1 /* CoreNews+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDDE7EB2341436E00EA58F1 /* CoreNews+CoreDataClass.swift */; };
+		CFDDE7F02341436E00EA58F1 /* CoreNews+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDDE7EC2341436E00EA58F1 /* CoreNews+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,11 +45,11 @@
 		CFA154E8233BB07A003C588A /* Coordinator+Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Coordinator+Model.swift"; sourceTree = "<group>"; };
 		CFA154EA233BB44A003C588A /* DecoderModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoderModels.swift; sourceTree = "<group>"; };
 		CFA154EC233BBDEC003C588A /* UtilsString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsString.swift; sourceTree = "<group>"; };
-		CFA15515233EAE7F003C588A /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
-		CFA15516233EAE7F003C588A /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		CFA15517233EAE7F003C588A /* CoreNews+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreNews+CoreDataClass.swift"; sourceTree = "<group>"; };
-		CFA15518233EAE7F003C588A /* CoreNews+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreNews+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CFDDE7E52340276000EA58F1 /* InternetConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnection.swift; sourceTree = "<group>"; };
+		CFDDE7E92341436E00EA58F1 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CFDDE7EA2341436E00EA58F1 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CFDDE7EB2341436E00EA58F1 /* CoreNews+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreNews+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CFDDE7EC2341436E00EA58F1 /* CoreNews+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreNews+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,10 +178,10 @@
 		CFA15508233E9AAC003C588A /* Model+CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				CFA15515233EAE7F003C588A /* User+CoreDataClass.swift */,
-				CFA15516233EAE7F003C588A /* User+CoreDataProperties.swift */,
-				CFA15517233EAE7F003C588A /* CoreNews+CoreDataClass.swift */,
-				CFA15518233EAE7F003C588A /* CoreNews+CoreDataProperties.swift */,
+				CFDDE7E92341436E00EA58F1 /* User+CoreDataClass.swift */,
+				CFDDE7EA2341436E00EA58F1 /* User+CoreDataProperties.swift */,
+				CFDDE7EB2341436E00EA58F1 /* CoreNews+CoreDataClass.swift */,
+				CFDDE7EC2341436E00EA58F1 /* CoreNews+CoreDataProperties.swift */,
 			);
 			path = "Model+CoreData";
 			sourceTree = "<group>";
@@ -265,22 +265,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				CFA154E3233B853D003C588A /* UtilsDate.swift in Sources */,
-				CFA1551A233EAE7F003C588A /* User+CoreDataProperties.swift in Sources */,
+				CFDDE7EF2341436E00EA58F1 /* CoreNews+CoreDataClass.swift in Sources */,
 				CF700820233A4B7300A37040 /* Tinkoff.xcdatamodeld in Sources */,
 				CF70083B233B738C00A37040 /* Fetching.swift in Sources */,
-				CFA1551B233EAE7F003C588A /* CoreNews+CoreDataClass.swift in Sources */,
 				CFDDE7E62340276000EA58F1 /* InternetConnection.swift in Sources */,
 				CF70082F233A588600A37040 /* Coordinator+First.swift in Sources */,
 				CF700818233A4B7300A37040 /* AppDelegate.swift in Sources */,
+				CFDDE7ED2341436E00EA58F1 /* User+CoreDataClass.swift in Sources */,
 				CF700835233A5CEF00A37040 /* NewsTabelCell.swift in Sources */,
+				CFDDE7EE2341436E00EA58F1 /* User+CoreDataProperties.swift in Sources */,
 				CFA154ED233BBDEC003C588A /* UtilsString.swift in Sources */,
 				CFA154E9233BB07A003C588A /* Coordinator+Model.swift in Sources */,
 				CFA154EB233BB44A003C588A /* DecoderModels.swift in Sources */,
 				CF700831233A58C100A37040 /* NewsTabel.swift in Sources */,
 				CFA154E6233BA216003C588A /* NewsController.swift in Sources */,
+				CFDDE7F02341436E00EA58F1 /* CoreNews+CoreDataProperties.swift in Sources */,
 				CF70082D233A585E00A37040 /* Coordinator+Main.swift in Sources */,
-				CFA15519233EAE7F003C588A /* User+CoreDataClass.swift in Sources */,
-				CFA1551C233EAE7F003C588A /* CoreNews+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
