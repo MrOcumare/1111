@@ -32,7 +32,6 @@ class NewsTabelCell: UITableViewCell {
         label.font = UIFont(name: "Roboto-Regular", size: 12)
         label.textAlignment = .left
         label.sizeToFit()
-        label.text = "Тинькофф подписал спонсорский контракт с первой ракеткой России Даниилом Медведевым"
         label.numberOfLines = 0
         return label
     }()
@@ -42,8 +41,6 @@ class NewsTabelCell: UITableViewCell {
         dateLabel.layer.masksToBounds = true
         dateLabel.font = UIFont(name: "Roboto-Regular", size: 6)
         dateLabel.textAlignment = .left
-        dateLabel.text = "06.04.1998.9898"
-       
         dateLabel.textColor = UIColor.black.withAlphaComponent(0.7)
         return dateLabel
     }()
@@ -54,12 +51,13 @@ class NewsTabelCell: UITableViewCell {
         return viewIcon
     }()
     
+    
+    
     lazy var counterOfView : UILabel = {
         let counterOfView = UILabel()
         counterOfView.layer.masksToBounds = true
         counterOfView.font = UIFont(name: "Roboto-Regular", size: 12)
         counterOfView.textAlignment = .left
-        counterOfView.text = "0"
         return counterOfView
     }()
     

@@ -39,7 +39,7 @@ class NewsTabelController : UIViewController {
         super.viewDidLoad()
         
         
-        //    COMMENT(mrocumare): если добавить сюда елементарную авторизацию, то можно хранить новости конкретного пользователя
+        //    COMMENT(mrocumare): если добавить сюда елементарную авторизацию, то можно хранить новости конкретного пользователя "задел на будующее"
         let userName = "user"
         
         firstFetch(userName)
@@ -108,7 +108,7 @@ extension NewsTabelController : UITableViewDataSource, UITableViewDelegate {
                 if (newsList![indexPath.row] as AnyObject).viewCount + 1 < Int16.max {
                     return (newsList![indexPath.row] as AnyObject).viewCount + 1
                 } else {
-                    return Int16(0)
+                    return Int16.max
                 }
             }()
             
@@ -162,6 +162,7 @@ extension NewsTabelController : UITableViewDataSource, UITableViewDelegate {
                     }
                 }
                 let deadline = DispatchTime.now() + .milliseconds(800)
+                
                 DispatchQueue.main.asyncAfter(deadline: deadline) {
                     spinner.stopAnimating()
                     self.newsTabel.tableFooterView?.isHidden = true
