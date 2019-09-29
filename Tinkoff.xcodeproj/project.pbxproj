@@ -14,7 +14,6 @@
 		CF70082D233A585E00A37040 /* Coordinator+Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF70082C233A585E00A37040 /* Coordinator+Main.swift */; };
 		CF70082F233A588600A37040 /* Coordinator+First.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF70082E233A588600A37040 /* Coordinator+First.swift */; };
 		CF700831233A58C100A37040 /* NewsTabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF700830233A58C100A37040 /* NewsTabel.swift */; };
-		CF700833233A592400A37040 /* getNews.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF700832233A592400A37040 /* getNews.swift */; };
 		CF700835233A5CEF00A37040 /* NewsTabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF700834233A5CEF00A37040 /* NewsTabelCell.swift */; };
 		CF70083B233B738C00A37040 /* Fetching.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF70083A233B738C00A37040 /* Fetching.swift */; };
 		CFA154E3233B853D003C588A /* UtilsDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA154E2233B853D003C588A /* UtilsDate.swift */; };
@@ -26,6 +25,7 @@
 		CFA1551A233EAE7F003C588A /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA15516233EAE7F003C588A /* User+CoreDataProperties.swift */; };
 		CFA1551B233EAE7F003C588A /* CoreNews+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA15517233EAE7F003C588A /* CoreNews+CoreDataClass.swift */; };
 		CFA1551C233EAE7F003C588A /* CoreNews+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA15518233EAE7F003C588A /* CoreNews+CoreDataProperties.swift */; };
+		CFDDE7E62340276000EA58F1 /* InternetConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDDE7E52340276000EA58F1 /* InternetConnection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,7 +38,6 @@
 		CF70082C233A585E00A37040 /* Coordinator+Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Coordinator+Main.swift"; sourceTree = "<group>"; };
 		CF70082E233A588600A37040 /* Coordinator+First.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Coordinator+First.swift"; sourceTree = "<group>"; };
 		CF700830233A58C100A37040 /* NewsTabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTabel.swift; sourceTree = "<group>"; };
-		CF700832233A592400A37040 /* getNews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getNews.swift; sourceTree = "<group>"; };
 		CF700834233A5CEF00A37040 /* NewsTabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTabelCell.swift; sourceTree = "<group>"; };
 		CF70083A233B738C00A37040 /* Fetching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fetching.swift; sourceTree = "<group>"; };
 		CFA154E2233B853D003C588A /* UtilsDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsDate.swift; sourceTree = "<group>"; };
@@ -50,6 +49,7 @@
 		CFA15516233EAE7F003C588A /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CFA15517233EAE7F003C588A /* CoreNews+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreNews+CoreDataClass.swift"; sourceTree = "<group>"; };
 		CFA15518233EAE7F003C588A /* CoreNews+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreNews+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CFDDE7E52340276000EA58F1 /* InternetConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +82,7 @@
 		CF700816233A4B7300A37040 /* Tinkoff */ = {
 			isa = PBXGroup;
 			children = (
+				CFDDE7E42340272300EA58F1 /* CheckInternetConnection */,
 				CFA154F0233BC016003C588A /* App */,
 				CFA154EF233BC001003C588A /* CoreLayer */,
 				CFA154E7233BA9AA003C588A /* Coordinator */,
@@ -92,7 +93,6 @@
 				CF700823233A4B7500A37040 /* LaunchScreen.storyboard */,
 				CF700826233A4B7500A37040 /* Info.plist */,
 				CF70081E233A4B7300A37040 /* Tinkoff.xcdatamodeld */,
-				CF700832233A592400A37040 /* getNews.swift */,
 			);
 			path = Tinkoff;
 			sourceTree = "<group>";
@@ -100,7 +100,7 @@
 		CF700836233ABAFA00A37040 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				CFA154E4233BA1B6003C588A /* controllerNews+ */,
+				CFA154E4233BA1B6003C588A /* News+Controller */,
 				CF700837233ABB1100A37040 /* NewsList+Controller */,
 			);
 			path = Controllers;
@@ -141,12 +141,12 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		CFA154E4233BA1B6003C588A /* controllerNews+ */ = {
+		CFA154E4233BA1B6003C588A /* News+Controller */ = {
 			isa = PBXGroup;
 			children = (
 				CFA154E5233BA216003C588A /* NewsController.swift */,
 			);
-			path = "controllerNews+";
+			path = "News+Controller";
 			sourceTree = "<group>";
 		};
 		CFA154E7233BA9AA003C588A /* Coordinator */ = {
@@ -184,6 +184,14 @@
 				CFA15518233EAE7F003C588A /* CoreNews+CoreDataProperties.swift */,
 			);
 			path = "Model+CoreData";
+			sourceTree = "<group>";
+		};
+		CFDDE7E42340272300EA58F1 /* CheckInternetConnection */ = {
+			isa = PBXGroup;
+			children = (
+				CFDDE7E52340276000EA58F1 /* InternetConnection.swift */,
+			);
+			path = CheckInternetConnection;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,7 +269,7 @@
 				CF700820233A4B7300A37040 /* Tinkoff.xcdatamodeld in Sources */,
 				CF70083B233B738C00A37040 /* Fetching.swift in Sources */,
 				CFA1551B233EAE7F003C588A /* CoreNews+CoreDataClass.swift in Sources */,
-				CF700833233A592400A37040 /* getNews.swift in Sources */,
+				CFDDE7E62340276000EA58F1 /* InternetConnection.swift in Sources */,
 				CF70082F233A588600A37040 /* Coordinator+First.swift in Sources */,
 				CF700818233A4B7300A37040 /* AppDelegate.swift in Sources */,
 				CF700835233A5CEF00A37040 /* NewsTabelCell.swift in Sources */,

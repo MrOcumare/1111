@@ -13,7 +13,7 @@ public protocol NewsLictControllerDelegate: class {
     func navigateToNewsContoller()
 }
 
-class NewsTabel : UIViewController {
+class NewsTabelController : UIViewController {
     
     
     var user : User!
@@ -42,28 +42,8 @@ class NewsTabel : UIViewController {
         
         //    COMMENT(mrocumare): если добавить сюда елементарную авторизацию, то можно хранить новости конкретного пользователя
         let userName = "user"
-        let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "name = %@", userName)
         
-        do {
-            let results = try context.fetch(fetchRequest)
-            if results.isEmpty {
-                user = User(context: context)
-                user.name = userName
-                guard let responseBuffer = fetchData(20, 0) else { print("error get array of data"); return }
-                user.corenews = addInNewsArray(responseBuffer)
-                user.incrementReq = 20
-                do {
-                    try context.save()
-                } catch let error as NSError {
-                    print("error in fers fetch : \(error.userInfo)")
-                }
-            } else {
-                user = results.first
-            }
-        } catch let error as NSError {
-            print(error.userInfo)
-        }
+        firstFetch(userName)
         
         navigationItem.title = "Tinkoff News"
         self.navigationController?.navigationBar.barTintColor = .yellow
@@ -71,6 +51,7 @@ class NewsTabel : UIViewController {
         view.addSubview(newsTabel)
         newsTabel.addSubview(refreshControl)
         setupTableView()
+        
         newsTabel.delegate = (self as UITableViewDelegate)
         newsTabel.dataSource = (self as UITableViewDataSource)
         newsTabel.register(NewsTabelCell.self, forCellReuseIdentifier: "newsCell")
@@ -87,15 +68,20 @@ class NewsTabel : UIViewController {
 
 }
 
-extension NewsTabel : UITableViewDataSource, UITableViewDelegate {
+extension NewsTabelController : UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let news = user.corenews else { return 1 }
-        return news.count
+        
+        guard let user = user else { return 0 }
+        return user.corenews?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = newsTabel.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath) as! NewsTabelCell
         
+        guard let user = user else {
+            print("error")
+            return cell
+        }
         guard let news = user.corenews?[indexPath.row] as? CoreNews, let tittle = news.tittle, let date = news.date, let viewCount = news.viewCount as? Int16 else {
             print("error")
             return cell
@@ -109,106 +95,123 @@ extension NewsTabel : UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150
     }
-    
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let newsList = user.corenews?.mutableCopy() as? NSMutableOrderedSet
         let newsForAdd = CoreNews(context: context)
-        newsForAdd.date = (newsList![indexPath.row] as AnyObject).date
-        newsForAdd.slug = (newsList![indexPath.row] as AnyObject).slug
-        newsForAdd.id = (newsList![indexPath.row] as AnyObject).id
-        newsForAdd.tittle = (newsList![indexPath.row] as AnyObject).tittle
-        newsForAdd.viewCount = {
-            if (newsList![indexPath.row] as AnyObject).viewCount + 1 < Int16.max {
-                return (newsList![indexPath.row] as AnyObject).viewCount + 1
+        if CheckInternet.Connection() || (user.corenews![indexPath.row] as! CoreNews).text != nil {
+            newsForAdd.date = (newsList![indexPath.row] as AnyObject).date
+            newsForAdd.slug = (newsList![indexPath.row] as AnyObject).slug
+            newsForAdd.id = (newsList![indexPath.row] as AnyObject).id
+            newsForAdd.tittle = (newsList![indexPath.row] as AnyObject).tittle
+            newsForAdd.viewCount = {
+                if (newsList![indexPath.row] as AnyObject).viewCount + 1 < Int16.max {
+                    return (newsList![indexPath.row] as AnyObject).viewCount + 1
+                } else {
+                    return Int16(0)
+                }
+            }()
+            
+            if (user.corenews![indexPath.row] as! CoreNews).text == nil {
+                newsForAdd.text = fetchNews((newsList![indexPath.row] as AnyObject).slug!)
             } else {
-                return Int16(0)
+                newsForAdd.text = (newsList![indexPath.row] as AnyObject).text!
             }
-        }()
-       
-        if (user.corenews![indexPath.row] as! CoreNews).text == nil {
-            newsForAdd.text = fetchNews((newsList![indexPath.row] as AnyObject).slug!)
+            
+            newsList![indexPath.row] = newsForAdd
+            user.corenews = newsList
+            do {
+                try context.save()
+            } catch let error as NSError {
+                print("error in download text by slug fetch : \(error.userInfo)")
+            }
+            
+            
+            currentSegueData.currentText =  (user.corenews![indexPath.row] as AnyObject).text!
+            currentSegueData.currentTittle = (user.corenews![indexPath.row] as AnyObject).tittle!
+            currentSegueData.currentDate = (user.corenews![indexPath.row] as AnyObject).date!
+            
+            tableView.reloadData()
+            self.delegate.navigateToNewsContoller()
         } else {
-            newsForAdd.text = (newsList![indexPath.row] as AnyObject).text!
+            self.Alert(Message: "Your Device is not connected with internet")
+            self.newsTabel.deselectRow(at: indexPath, animated: true)
+            
         }
-        newsList![indexPath.row] = newsForAdd
-        user.corenews = newsList
-        do {
-            try context.save()
-        } catch let error as NSError {
-            print("error in download text by slug fetch : \(error.userInfo)")
-        }
-        currentSegueData.currentText =  (user.corenews![indexPath.row] as AnyObject).text!
-        currentSegueData.currentTittle = (user.corenews![indexPath.row] as AnyObject).tittle!
-        currentSegueData.currentDate = (user.corenews![indexPath.row] as AnyObject).date!
-        tableView.reloadData()
-        self.delegate.navigateToNewsContoller()
+        
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-
-        let lastSectionIndex = tableView.numberOfSections - 1
-        let lastRowIndex = tableView.numberOfRows(inSection: lastSectionIndex) - 1
-        if indexPath.section ==  lastSectionIndex && indexPath.row == lastRowIndex {
-            print("this is the last cell")
+        if CheckInternet.Connection() {
+            let lastSectionIndex = tableView.numberOfSections - 1
+            let lastRowIndex = tableView.numberOfRows(inSection: lastSectionIndex) - 1
             let spinner = UIActivityIndicatorView(style: .gray)
-            spinner.startAnimating()
-            spinner.frame = CGRect(x: CGFloat(0), y: CGFloat(0), width: tableView.bounds.width, height: CGFloat(44))
-            
-            self.newsTabel.tableFooterView = spinner
-            self.newsTabel.tableFooterView?.isHidden = false
-            
-            if let newPartArray = fetchData(20, Int(user!.incrementReq)) {
-                user.corenews = addInNewsArray(newPartArray)
-                user.incrementReq = user.incrementReq + 20
-                do {
-                    try context.save()
-                } catch let error as NSError {
-                    print("error in fers fetch : \(error.userInfo)")
-                }
-
-            }
-            let deadline = DispatchTime.now() + .milliseconds(800)
-            DispatchQueue.main.asyncAfter(deadline: deadline) {
+            if indexPath.section ==  lastSectionIndex && indexPath.row == lastRowIndex {
+                print("this is the last cell")
+                let spinner = UIActivityIndicatorView(style: .gray)
                 spinner.startAnimating()
-                self.newsTabel.tableFooterView?.isHidden = true
-                tableView.reloadData()
+                spinner.frame = CGRect(x: CGFloat(0), y: CGFloat(0), width: tableView.bounds.width, height: CGFloat(44))
+                self.newsTabel.tableFooterView = spinner
+                self.newsTabel.tableFooterView?.isHidden = false
+                if let newPartArray = fetchData(20, Int(user!.incrementReq)) {
+                    user.corenews = addInNewsArray(newPartArray)
+                    user.incrementReq = user.incrementReq + 20
+                    do {
+                        try context.save()
+                    } catch let error as NSError {
+                        print("error in fers fetch : \(error.userInfo)")
+                    }
+                }
+                let deadline = DispatchTime.now() + .milliseconds(800)
+                DispatchQueue.main.asyncAfter(deadline: deadline) {
+                    spinner.stopAnimating()
+                    self.newsTabel.tableFooterView?.isHidden = true
+                    tableView.reloadData()
+                }
+                let index = NSIndexPath(row: indexPath.row, section: 0)
+                self.newsTabel.scrollToRow(at: index as IndexPath, at: .top, animated: true)
             }
         }
     }
     
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
-        var positionInArrayContext = 0
-        var incrementRequest = 0
-        var isPullFinish = false
-        while isPullFinish == false {
-            guard let responseBuffer = fetchData(20, incrementRequest) else {
-                print("error get array of data")
-                return
+        if CheckInternet.Connection() {
+            var positionInArrayContext = 0
+            var incrementRequest = 0
+            var isPullFinish = false
+            if user != nil {
+                while isPullFinish == false {
+                    guard let responseBuffer = fetchData(20, incrementRequest) else {
+                        print("error get array of data")
+                        return
+                    }
+                    var bufferList = NSMutableOrderedSet()
+                    (isPullFinish, positionInArrayContext, bufferList) = addInArrayAfterPullRefresh(responseBuffer, positionInArrayContext)
+                    user.corenews = bufferList
+                    
+                    do {
+                        try context.save()
+                    } catch let error as NSError {
+                        print("error in pull-to-refrash block : \(error.userInfo)")
+                    }
+                    incrementRequest = incrementRequest + 20
+                }
+                
+                if incrementRequest > 20 {
+                    user.incrementReq = user.incrementReq + Int64((incrementRequest / 20))
+                    do {
+                        try context.save()
+                    } catch let error as NSError {
+                        print("error in pull-to-refrash block when resave incrementRequest: \(error.userInfo)")
+                    }
+                }
+            } else {
+                firstFetch("user")
             }
-            var bufferList = NSMutableOrderedSet()
-            (isPullFinish, positionInArrayContext, bufferList) = addInArrayAfterPullRefresh(responseBuffer, positionInArrayContext)
-            user.corenews = bufferList
-            
-            do {
-                try context.save()
-            } catch let error as NSError {
-                print("error in pull-to-refrash block : \(error.userInfo)")
-            }
-            incrementRequest = incrementRequest + 20
+        } else {
+            self.Alert(Message: "Your Device is not connected with internet")
         }
-        
-        if incrementRequest > 20 {
-            user.incrementReq = user.incrementReq + Int64((incrementRequest / 20))
-            do {
-                try context.save()
-            } catch let error as NSError {
-                print("error in pull-to-refrash block when resave incrementRequest: \(error.userInfo)")
-            }
-        }
-        
-       
         let deadline = DispatchTime.now() + .milliseconds(800)
         DispatchQueue.main.asyncAfter(deadline: deadline) {
             self.refreshControl.endRefreshing()
@@ -252,6 +255,43 @@ extension NewsTabel : UITableViewDataSource, UITableViewDelegate {
             }
         }
         return (false, indexInArrayOfNewsBuffer, newsList!)
+    }
+    
+    func Alert (Message: String){
+        
+        let alert = UIAlertController(title: "Alert", message: Message, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "ok", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+        
+    }
+    
+    func firstFetch(_ userName: String) {
+        let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "name = %@", userName)
+        
+        do {
+            let results = try context.fetch(fetchRequest)
+            if results.isEmpty {
+                if CheckInternet.Connection() {
+                    user = User(context: context)
+                    user.name = userName
+                    guard let responseBuffer = fetchData(20, 0) else { print("error get array of data"); return }
+                    user.corenews = addInNewsArray(responseBuffer)
+                    user.incrementReq = 20
+                    do {
+                        try context.save()
+                    } catch let error as NSError {
+                        print("error in fers fetch : \(error.userInfo)")
+                    }
+                } else {
+                    self.Alert(Message: "Your Device is not connected with internet")
+                }
+            } else {
+                user = results.first
+            }
+        } catch let error as NSError {
+            print(error.userInfo)
+        }
     }
 }
 

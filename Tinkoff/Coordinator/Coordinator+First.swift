@@ -21,7 +21,7 @@ class FirstCoordinator: Coordinator {
     }
     
     func start() {
-        let newsListController : NewsTabel = NewsTabel()
+        let newsListController : NewsTabelController = NewsTabelController()
         newsListController.delegate = self
         self.navigationController.viewControllers = [newsListController]
     }
